@@ -1,0 +1,38 @@
+<div class="mb-4" ng-if="!$ctrl.isRolled || !$ctrl.isChild">
+    <div class="shadow md:flex bg-gray-100 space-x-4 mb-3 rounded-xl p-8 md:p-0" ng-init="displayTextArea = false">
+        <div>
+            <img class="object-cover w-full min-h-24 md:w-24 md:shadow md:h-auto md:rounded-xl rounded-full mx-auto" src="{{ $ctrl.commentInfo.avatarUrl || ('./images/avatar-plug.png') }}" alt="Avatar url">
+        </div>
+        <div class="space-y-3">
+            <p class="text-xl">{{ $ctrl.commentInfo.username }}</p>
+            <p class="text-xl">{{ $ctrl.commentInfo.date | date }}</p>
+        </div>
+    </div>
+    <p class="text-2xl">{{ $ctrl.commentInfo.message }}</p>
+    <span ng-click="displayTextArea = !displayTextArea">{{"ответить"| titlecase}}</span>
+
+    <div ng-if="displayTextArea" class="border rounded-xl p-5">
+        <div ng-init="message = ''" class="max-w-xl">
+
+            <label>
+                <span>Анонимно</span>
+                <textarea ng-model="message" rows="5" class="border rounded w-full"></textarea>
+            </label>
+
+            <button class="rounded-xl text-black-400 p-2 bg-gray-200 border shadow" ng-click="displayTextArea=false; $ctrl.createThread(message)">Добавить</button>
+        </div>
+    </div>
+</div>
+<div ng-if="$ctrl.isRolled && $ctrl.isChild">
+    <p>
+        <span>
+            {{$ctrl.commentInfo.username}}
+        </span>
+        {{$ctrl.commentInfo.isRolled}}
+        <span class="cursor-pointer" ng-click="$ctrl.toggleThread()">Развернуть</span>
+    </p>
+</div>
+
+<div class="ml-8">
+    <comment is-child="true" is-rolled="$ctrl.isRolled" comment-info="commentThread" ng-repeat="commentThread in $ctrl.commentInfo.thread"></comment>
+</div>
