@@ -34,5 +34,5 @@
 </div>
 
 <div class="ml-8">
-    <comment is-child="true" is-rolled="$ctrl.isRolled" comment-info="commentThread" ng-repeat="commentThread in $ctrl.commentInfo.thread"></comment>
+    <comment on-update="$ctrl.onUpdate({})" is-child="true" is-rolled="$ctrl.isRolled" comment-info="commentThread" ng-repeat="commentThread in $ctrl.commentInfo.thread"></comment>
 </div>

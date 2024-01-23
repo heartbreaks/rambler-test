@@ -10,5 +10,22 @@ export const app = angular.module('app', [
 
 
 app.controller('MainController', function($scope, commentsService) {
-    $scope.comments = commentsList
+    $scope.commentValue = null
+
+    $scope.comments = angular.copy(commentsList)
+
+    $scope.saveComment = function () {
+        if (!$scope.commentValue) return null
+
+        $scope.comments.push({
+            username: 'Anonym from textarea',
+            postedAt: Date.now(),
+            message: $scope.commentValue,
+        })
+        $scope.commentValue = ''
+    }
+
+    $scope.updateThread = function () {
+        $scope.comments = [...$scope.comments]
+    }
 })

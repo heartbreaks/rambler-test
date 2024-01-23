@@ -2,7 +2,7 @@
   "name": "test",
   "version": "1.0.0",
   "description": "AngularJS 1.X merged with ReactJS",
-  "main": "index.js",
+  "main": "../src/angular/app.js",
   "author": "Sergey Khokhlov",
   "license": "MIT",
   "scripts": {

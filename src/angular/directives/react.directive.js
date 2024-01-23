@@ -1,18 +1,19 @@
 import { app } from '../app'
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Layout from "@react/Layout";
+import CommentCounter from "@react/Layout";
 
-const reactDirective = app.directive('reactDirective', function() {
+const reactDirective = app.directive('reactCommentCounter', function() {
     return {
         template: '<div id="reactapp" class="react-part"></div>',
         link: function(scope, el, attrs){
             const reactApp = document.getElementById('reactapp')
             const root = createRoot(reactApp)
 
-            scope.$watch('comments', function(newValue, oldValue) {
-
-                root.render(<Layout comments={newValue}/>);
+            // В целях оптимизации, нежелательно использование вотчеров
+            scope.$watch('comments', function(newValue) {
+                let immutableData = angular.copy(newValue, [])
+                root.render(<CommentCounter comments={immutableData}/>);
             }, true);
 
         }

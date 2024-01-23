@@ -7,7 +7,8 @@ export default commentsModule.component('comment', {
         commentInfo: '<',
         isRolled: '<',
         isChild: '<',
-        maxNestedLeverage: '@'
+        maxNestedLeverage: '@',
+        onUpdate: '&'
     },
     template: require('./comment.component.html').default,
     controller: [CommentComponent]
@@ -18,13 +19,14 @@ function CommentComponent() {
 
     self.createThread = (message) => {
         this.commentInfo.thread = this.commentInfo.thread || []
-
         this.commentInfo.thread.push({
             message,
             username: 'Anonymous',
             postedAt: Date.now(),
             avatarUrl: anonImage
         })
+
+        this.onUpdate()
     }
 
     this.toggleThread = (isRolled = false) => {

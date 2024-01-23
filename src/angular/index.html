@@ -14,13 +14,17 @@
 
 <body>
 <div ng-app="app">
-    <div ng-controller="MainController">
+    <div class="p-5 space-y-2" ng-controller="MainController">
+        <form ng-submit="saveComment()">
+            <textarea required class="border p-3 shadow rounded-lg block mb-3 w-full" ng-model="commentValue" name="commentArea" cols="30" rows="5"></textarea>
+            <button class="p-2 border rounded">Оставить комментарий</button>
+        </form>
         <div>
-            <react-directive comments="comments"></react-directive>
+            <react-comment-counter comments="comments"></react-comment-counter>
         </div>
-        <div class="p-5 space-y-2">
+        <div class="space-y-2">
             <div ng-repeat="data in comments">
-                <comment comment-info="data"></comment>
+                <comment on-update="updateThread()" comment-info="data"></comment>
             </div>
         </div>
 
